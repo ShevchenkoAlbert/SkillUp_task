@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Skillup</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style/reset.css">
+	<link rel="stylesheet" href="style/style.css">
+	
+
+</head>
+<body>
+	<header>
+		<div class="logo_div">
+			<img src="img/logo.png" alt="logo">
+			<span> Hi, guest!</span>
+		</div>
+		<div class="inputs">
+			<input type="text" class="header_input" id="login" placeholder="login">
+			<input type="password" class="header_input" id="password" placeholder="password">
+			<input type="button" id="singIn" class="header_input" value="Sing in" onclick="isLogged()" disabled>
+		</div>
+	</header>
+	<section>
+		<div class="buttons">
+			<button id="showContent">Show content</button>
+			<button onclick="showFree(videos)">Show/hide free videos</button>
+		</div>
+		<div id="content" class="content">
+			
+		</div>
+	</section>
+
+	<script src="js/video.config.js"></script>
+	<script src="js/advertising.config.js"></script>
+	<script src="js/user.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
