@@ -6,8 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="style/reset.css">
 	<link rel="stylesheet" href="style/style.css">
-	
-
+	<script src="js/video.config.js"></script>
+	<script src="js/advertising.config.js"></script>
+	<script src="js/user.js"></script>
+	<script src="js/main.js"></script>
 </head>
 <body>
 	<header>
@@ -18,23 +20,17 @@
 		<div class="inputs">
 			<input type="text" class="header_input" id="login" placeholder="login">
 			<input type="password" class="header_input" id="password" placeholder="password">
-			<input type="button" id="singIn" class="header_input" value="Sing in" onclick="isLogged()" disabled>
+			<input type="button" id="singIn" class="header_input" value="Sing in" >
 		</div>
 	</header>
 	<section>
 		<div class="buttons">
 			<button id="showContent">Show content</button>
-			<button onclick="showFree(videos)">Show/hide free videos</button>
+			<button>Show/hide free videos</button>
 		</div>
 		<div id="content" class="content">
 			
 		</div>
 	</section>
-
-	<script src="js/video.config.js"></script>
-	<script src="js/advertising.config.js"></script>
-	<script src="js/user.js"></script>
-	<script src="js/main.js"></script>
-
 </body>
 </html>

@@ -1,22 +1,17 @@
-	// import user from './user';
-
-	let parentElem = document.getElementById('content');
- 	let index = 0;
- 	let log = document.getElementById('login');
- 	let pass = document.getElementById('password');
+window.onload = () => {
  	localStorage.setItem('isLogin', false);
  	let showContent = document.getElementById('showContent');
- 	showContent.addEventListener("click", function(){renderPage(videos,advertising)});
+ 	showContent.addEventListener('click', function(){renderPage(videos,advertising)});
+	
+ 	let autorization = document.getElementById('singIn');
+ 	autorization.addEventListener('click', checkLogin);
  	
-
- 	
-
-	function makeVideo(video) {
+	function makeVideo(video,index) {
 		let div = document.createElement('div');
 		div.className = 'block_video';
 		let p = document.createElement('p');
 		let a = document.createElement('a');
-		a.setAttribute('href', '#');
+		a.setAttribute('href', redirectToSingleVideoPage(index));
 		let img = document.createElement('img');
 		img.setAttribute('src',video.preview);
 		p.innerHTML = video.title ;
@@ -33,8 +28,8 @@
 
 	function getAccessClass(video) {
 		if (video === 'free') 
-			return 'green'
-		return  'red'
+			return 'accessColorFree'
+		return  'accessColorPay'
 	}
 
 	function makeReklama(advertising){
@@ -44,12 +39,13 @@
 		rek_img.setAttribute('src', advertising.url);
 		rek_div.appendChild(rek_img);
 		return rek_div;
-
 	}
 
 	function renderPage(videos,advertising) {
+		let parentElem = document.getElementById('content');
+ 		let index = 0;
 		for (let i =0; i<videos.length; i++) {
-			const createdDiv = makeVideo(videos[i]);
+			const createdDiv = makeVideo(videos[i],i);
 			parentElem.appendChild(createdDiv);
 
 			if ((i+1)%3 === 0) {
@@ -57,20 +53,40 @@
 				parentElem.appendChild(createdReklama);
 				index++;
 			}
-
 		}
 	}
 
+	function isAccess() {
+		localStorage.setItem('isLogin', true)
+		
+	}
+
 	function checkLogin() {
-		if (log.value === user.login && pass.value === user.password) 
-			localStorage.setItem('isLogin', true)
-		else if (log.value !== user.login || pass.value !== user.password ) 
+		let log = document.getElementById('login');
+ 		let pass = document.getElementById('password');
+		if (log.value.trim() === user.login && pass.value.trim() === user.password) {
+			isAccess();
+			alert('success')
+		}
+		else if (log.value !== user.login || pass.value !== user.password ) {
+			console.log(log.vale , pass);
 			alert('Uncorrect login or password. Try again')
+			}
 		else alert('Sorry! You must registered')
 	}
 
 	function showFree(videos){
 		videos.forEach((item,i) => console.log(item))
 	} 
+
+	function redirectToSingleVideoPage(index) {
+		let changePath = './video.html?index='+ index;
+		return changePath
+
+	}
+
+
+
+}
 
 
