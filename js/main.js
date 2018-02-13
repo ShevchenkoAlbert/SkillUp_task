@@ -10,8 +10,6 @@ window.onload = () => {
 		let div = document.createElement('div');
 		div.className = 'block_video';
 		let p = document.createElement('p');
-		let a = document.createElement('a');
-		a.setAttribute('href', redirectToSingleVideoPage(index));
 		let img = document.createElement('img');
 		img.setAttribute('src',video.preview);
 		p.innerHTML = video.title ;
@@ -20,9 +18,9 @@ window.onload = () => {
 		accessDiv.className = 'access_block ' + accessClass;
 		accessDiv.innerHTML = video.access;
 		div.appendChild(p);
-		a.appendChild(img);
-		div.appendChild(a);
+		div.appendChild(img);
 		div.appendChild(accessDiv);
+		div.addEventListener('click', function(){checkAccess(video,index)})
 		return div;
 	}
 
@@ -56,36 +54,55 @@ window.onload = () => {
 		}
 	}
 
-	function isAccess() {
+	function setAccess() {
 		localStorage.setItem('isLogin', true)
 		
 	}
+
+	let isLogin = () => localStorage.getItem('isLogin') === 'true' 
+	
 
 	function checkLogin() {
 		let log = document.getElementById('login');
  		let pass = document.getElementById('password');
 		if (log.value.trim() === user.login && pass.value.trim() === user.password) {
-			isAccess();
+			setAccess();
 			alert('success')
+			
 		}
 		else if (log.value !== user.login || pass.value !== user.password ) {
 			console.log(log.vale , pass);
 			alert('Uncorrect login or password. Try again')
+			
 			}
 		else alert('Sorry! You must registered')
 	}
 
-	function showFree(videos){
-		videos.forEach((item,i) => console.log(item))
-	} 
 
-	function redirectToSingleVideoPage(index) {
-		let changePath = './video.html?index='+ index;
-		return changePath
-
+	function createUrl(index) {
+		return  './video.html?index='+ index; 
 	}
 
+	function moveToVideo (index) {
 
+		let a = document.createElement('a');
+		a.setAttribute('href', createUrl(index));
+		a.style.display = 'none';
+		a.setAttribute('id', index);
+		let event = new Event('click');
+		let body = document.getElementsByTagName('body');
+		body[0].appendChild(a);
+		a.dispatchEvent(event);
+		body[0].removeChild(a);
+	}
+
+	function checkAccess (video,index) {
+		if (video.access === 'free') moveToVideo(index)
+		else if(video.access === 'pay') {
+			if(isLogin()) moveToVideo(index)
+			else alert('Sorry! You must registered')
+		}
+	}
 
 }
 

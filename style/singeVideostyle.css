@@ -1,0 +1,27 @@
+body {
+	background: rgba(164, 164, 164, 0.7);
+}
+.row {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	width: 80%;
+	margin: 0 auto;
+	background: #fff;
+}
+
+#video {
+	width: 70%;
+	margin: 25px;
+
+}
+
+#video video {
+	width: 100%;
+}
+
+#aside {
+	width: 30%;
+	margin-right: 10px;
+	margin-top: 25px;
+}
