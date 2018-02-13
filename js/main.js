@@ -1,5 +1,5 @@
 window.onload = () => {
- 	localStorage.setItem('isLogin', false);
+ 	// localStorage.setItem('isLogin', false);
  	let showContent = document.getElementById('showContent');
  	showContent.addEventListener('click', function(){renderPage(videos,advertising)});
 	
@@ -89,10 +89,10 @@ window.onload = () => {
 		a.setAttribute('href', createUrl(index));
 		a.style.display = 'none';
 		a.setAttribute('id', index);
-		let event = new Event('click');
 		let body = document.getElementsByTagName('body');
 		body[0].appendChild(a);
-		a.dispatchEvent(event);
+		let elemLink = document.getElementById(index);
+		elemLink.click();
 		body[0].removeChild(a);
 	}
 
