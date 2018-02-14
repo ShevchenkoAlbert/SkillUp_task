@@ -12,7 +12,7 @@ let asideBlock = document.getElementById('aside');
 let title = document.createElement('p');
 title.innerHTML = videos[index].title; 
 let rate = document.createElement('div');
-rate.innerHTML = videos[index].rate;
+rate.appendChild (addRateStar(videos[index]));
 let year = document.createElement('div');
 year.innerHTML = 'year: ' + videos[index].year;
 let genre = document.createElement('div');
@@ -25,11 +25,20 @@ asideBlock.appendChild(year);
 asideBlock.appendChild(genre);
 asideBlock.appendChild(time);
 
-
-
-
-
-
+function addRateStar(video) {
+	let star, rate
+	rate = document.createElement('div');
+	for(let i=1; i<6; i++) {
+		star = document.createElement('i');
+		star.setAttribute('aria-hidden', 'true');
+		if (i <= video.rate) {
+		star.className = 'fa fa-star';
+		rate.appendChild(star) }
+		else star.className = 'fa fa-star-o';
+		rate.appendChild(star)		
+	}	
+	return rate	
+}
 
 function getQueryVariable() {
     var query = window.location.search.substring(1);
@@ -38,9 +47,30 @@ function getQueryVariable() {
         return index;    
 }
 
+let shortDesc = document.getElementById('shortDescription');
+let p = document.createElement('p');
+p.innerHTML = videos[index].shortDescription;
+shortDesc.appendChild(p);
+let showMore = document.createElement('button');
+showMore.innerHTML = 'Read more';
+showMore.addEventListener('click', function(){change_visibility('shortDescription', 'largeDescription' )});
+shortDesc.appendChild(showMore);
+
+let largeDesc = document.getElementById('largeDescription');
+largeDesc.style.display = 'none';
+let largeParagrh = document.createElement('p');
+largeParagrh.innerHTML = videos[index].largeDescription;
+largeDesc.appendChild(largeParagrh);
+let hideMore = document.createElement('button');
+hideMore.innerHTML = 'Hide more';
+hideMore.addEventListener('click', function(){change_visibility('largeDescription', 'shortDescription' )});
+largeDesc.appendChild(hideMore);
+
+
+
 function change_visibility (block_close, block_open) {
     document.getElementById(block_close).style.display='none';
-    document.getElementById(block_open).style.display='';
+    document.getElementById(block_open).style.display='block';
 }
 
 }

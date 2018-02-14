@@ -39,7 +39,13 @@ header img {
 }
 #singIn {
 	background: rgba(20, 186, 20, 1);
-	color: #fff;
+	color: #000;
+}
+#logOut {
+	display: none;
+	background: red;
+	border: none;
+	border-radius: 4px;
 }
 section {
 	
@@ -73,7 +79,7 @@ section {
 	color: #000;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-around;
+	justify-content: center;
 	
 }
 .block_video {
@@ -98,8 +104,15 @@ section {
 	font-weight: 600;
 }
 .block_reklama {
-	width: 100%;
+	width: 80%;
+	display: flex;
+	justify-content: center;
 	
+}
+.block_reklama img {
+	width: auto;
+	height: 100px;
+	margin: 0 auto;
 }
 .accessColorFree {
 	color: green;

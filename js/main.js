@@ -1,10 +1,26 @@
 window.onload = () => {
  	// localStorage.setItem('isLogin', false);
+ 	const FREE = 'free';
+ 	const PAY = 'pay';
+ 	let access = FREE;
+ 	let sortAccess = FREE;
+
  	let showContent = document.getElementById('showContent');
  	showContent.addEventListener('click', function(){renderPage(videos,advertising)});
 	
  	let autorization = document.getElementById('singIn');
  	autorization.addEventListener('click', checkLogin);
+
+ 	let logOutBut = document.getElementById('logOut');
+ 	logOutBut.addEventListener('click', logOut);
+
+ 	let filterBut = document.getElementById('filterBut');
+ 	filterBut.addEventListener('click', function(){renderFilterVideo(videos,advertising)});
+
+ 	let sortBut = document.getElementById('sortBut');
+ 	sortBut.addEventListener('click', function(){renderSortVideo(videos,advertising)});
+
+ 	
  	
 	function makeVideo(video,index) {
 		let div = document.createElement('div');
@@ -41,6 +57,7 @@ window.onload = () => {
 
 	function renderPage(videos,advertising) {
 		let parentElem = document.getElementById('content');
+		parentElem.innerHTML = '';
  		let index = 0;
 		for (let i =0; i<videos.length; i++) {
 			const createdDiv = makeVideo(videos[i],i);
@@ -55,8 +72,7 @@ window.onload = () => {
 	}
 
 	function setAccess() {
-		localStorage.setItem('isLogin', true)
-		
+		localStorage.setItem('isLogin', true)	
 	}
 
 	let isLogin = () => localStorage.getItem('isLogin') === 'true' 
@@ -67,6 +83,10 @@ window.onload = () => {
  		let pass = document.getElementById('password');
 		if (log.value.trim() === user.login && pass.value.trim() === user.password) {
 			setAccess();
+			log.style.display = 'none';
+			pass.style.display = 'none';
+			autorization.style.display = 'none';
+			logOutBut.style.display = 'block';
 			alert('success')
 			
 		}
@@ -78,6 +98,17 @@ window.onload = () => {
 		else alert('Sorry! You must registered')
 	}
 
+	function logOut () {
+		let log = document.getElementById('login');
+ 		let pass = document.getElementById('password');
+		localStorage.setItem('isLogin', false);
+		logOutBut.style.display ='none';
+		log.style.display = 'inline-block';
+		log.value = '';
+		pass.style.display = 'inline-block';
+		pass.value = '';
+		autorization.style.display = 'inline-block';
+	}
 
 	function createUrl(index) {
 		return  './video.html?index='+ index; 
@@ -104,6 +135,28 @@ window.onload = () => {
 		}
 	}
 
+	function sortVideo (videoA, videoB) {
+		if (videoA.access === sortAccess) return 1
+		else if (videoB.access === sortAccess) return -1
+		else return 0
+	}
+	
+	function renderFilterVideo (videos,advertising) {
+		document.getElementById('content').innerHTML = '';
+		let filterArray = videos.filter((video) => video.access === access);
+		renderPage(filterArray,advertising);
+		access = access === PAY ? FREE : PAY;
+	}
+
+	function renderSortVideo (videos,advertising) {
+		document.getElementById('content').innerHTML = '';
+		let sortArray = videos.sort(sortVideo);
+		renderPage(sortArray,advertising);
+		sortAccess = sortAccess === PAY ? FREE : PAY;
+
+
+
+	}
 }
 
 

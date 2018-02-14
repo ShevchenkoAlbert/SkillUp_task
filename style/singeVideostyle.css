@@ -1,13 +1,21 @@
 body {
 	background: rgba(164, 164, 164, 0.7);
 }
-.row {
+.row{
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
 	width: 80%;
 	margin: 0 auto;
 	background: #fff;
+}
+
+.descriptionBlock {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 80%;
+	margin: 0 auto;
+	background: #fff
 }
 
 #video {
@@ -24,4 +32,8 @@ body {
 	width: 30%;
 	margin-right: 10px;
 	margin-top: 25px;
+}
+
+#shortDescription, #largeDescription {
+	margin: 25px;
 }
