@@ -1,4 +1,5 @@
-const videos = [
+let videos = [];
+const videosBack = [
 {
     "url": "./video/VfE_html5.mp4",
     "title": "Test video 1",

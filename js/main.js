@@ -5,8 +5,10 @@ window.onload = () => {
  	let access = FREE;
  	let sortAccess = FREE;
 
- 	let showContent = document.getElementById('showContent');
- 	showContent.addEventListener('click', function(){renderPage(videos,advertising)});
+ 	let getContent = document.getElementById('getContent');
+ 	getContent.addEventListener('click', getVideo);
+
+ 	// debugger
 	
  	let autorization = document.getElementById('singIn');
  	autorization.addEventListener('click', checkLogin);
@@ -15,13 +17,48 @@ window.onload = () => {
  	logOutBut.addEventListener('click', logOut);
 
  	let filterBut = document.getElementById('filterBut');
- 	filterBut.addEventListener('click', function(){renderFilterVideo(videos,advertising)});
+ 	filterBut.addEventListener('click', function(){
+ 		renderFilterVideo(videos,advertising)
+ 	});
 
  	let sortBut = document.getElementById('sortBut');
- 	sortBut.addEventListener('click', function(){renderSortVideo(videos,advertising)});
+ 	sortBut.addEventListener('click', function(){
+ 		debugger
+ 		renderSortVideo(videos,advertising)}
+ 		);
 
- 	
- 	
+ 	let loggedUser = document.getElementById('loggedUser');
+
+ 	function spinnerOn () {
+ 		let spiner = document.getElementById('spiner');
+ 		spiner.style.display = 'block';
+ 	}
+
+ 	function spinnerOff () {
+ 		let spiner = document.getElementById('spiner');
+ 		spiner.style.display = 'none';
+ 	}
+
+
+ 	function getVideo() {
+ 		spinnerOn();
+ 		axios.all([
+  			axios.get('http://10.10.54.227:8000/videos'),
+  			axios.get('http://10.10.54.227:8000/advertising')
+		]).then(axios.spread((response1,response2) => {
+  			videos = response1.data;
+  			advertising = response2.data;
+  			spinnerOff();
+ 			renderPage(videos,advertising)
+ 			})).catch(error => {
+ 		 console.log(error);
+		});
+
+ 		// return videos, advertising
+ 		}
+ 		console.log(videos);
+  		console.log(advertising);
+
 	function makeVideo(video,index) {
 		let div = document.createElement('div');
 		div.className = 'block_video';
@@ -56,6 +93,7 @@ window.onload = () => {
 	}
 
 	function renderPage(videos,advertising) {
+
 		let parentElem = document.getElementById('content');
 		parentElem.innerHTML = '';
  		let index = 0;
@@ -69,6 +107,7 @@ window.onload = () => {
 				index++;
 			}
 		}
+		return videos, advertising
 	}
 
 	function setAccess() {
@@ -81,17 +120,19 @@ window.onload = () => {
 	function checkLogin() {
 		let log = document.getElementById('login');
  		let pass = document.getElementById('password');
+ 		let loggedUser = document.getElementById('loggedUser');
 		if (log.value.trim() === user.login && pass.value.trim() === user.password) {
 			setAccess();
 			log.style.display = 'none';
 			pass.style.display = 'none';
 			autorization.style.display = 'none';
-			logOutBut.style.display = 'block';
+			loggedUser.innerHTML = 'Hello,' + ' ' + log.value;
+			loggedUser.style.display = 'inline-block'; 
+			logOutBut.style.display = 'inline-block';
 			alert('success')
 			
 		}
 		else if (log.value !== user.login || pass.value !== user.password ) {
-			console.log(log.vale , pass);
 			alert('Uncorrect login or password. Try again')
 			
 			}
@@ -101,8 +142,10 @@ window.onload = () => {
 	function logOut () {
 		let log = document.getElementById('login');
  		let pass = document.getElementById('password');
+ 		let loggedUser = document.getElementById('loggedUser');
 		localStorage.setItem('isLogin', false);
 		logOutBut.style.display ='none';
+		loggedUser.style.display = 'none'; 
 		log.style.display = 'inline-block';
 		log.value = '';
 		pass.style.display = 'inline-block';
@@ -149,14 +192,16 @@ window.onload = () => {
 	}
 
 	function renderSortVideo (videos,advertising) {
+		debugger
 		document.getElementById('content').innerHTML = '';
-		let sortArray = videos.sort(sortVideo);
+		let sortArray = videos.map((i) => i).sort(sortVideo);
 		renderPage(sortArray,advertising);
 		sortAccess = sortAccess === PAY ? FREE : PAY;
 
 
 
 	}
-}
 
+	
+}
 

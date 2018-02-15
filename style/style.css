@@ -120,3 +120,8 @@ section {
 .accessColorPay {
 	color: red;
 }
+
+.spiner {
+	width: 80%;
+	display: none;
+}

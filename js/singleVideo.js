@@ -4,21 +4,21 @@ let videoBlock = document.getElementById('video');
 let video = document.createElement('video');
 video.setAttribute('controls','controls')
 let source = document.createElement('source');
-source.setAttribute('src', videos[index].url);
+source.setAttribute('src', videosBack[index].url);
 video.appendChild(source);
 videoBlock.appendChild(video);
 
 let asideBlock = document.getElementById('aside');
 let title = document.createElement('p');
-title.innerHTML = videos[index].title; 
+title.innerHTML = videosBack[index].title; 
 let rate = document.createElement('div');
-rate.appendChild (addRateStar(videos[index]));
+rate.appendChild (addRateStar(videosBack[index]));
 let year = document.createElement('div');
-year.innerHTML = 'year: ' + videos[index].year;
+year.innerHTML = 'year: ' + videosBack[index].year;
 let genre = document.createElement('div');
-genre.innerHTML = 'genre: ' + videos[index].genre;
+genre.innerHTML = 'genre: ' + videosBack[index].genre;
 let time = document.createElement('div');
-time.innerHTML = 'time: ' + videos[index].time;
+time.innerHTML = 'time: ' + videosBack[index].time;
 asideBlock.appendChild(title);
 asideBlock.appendChild(rate);
 asideBlock.appendChild(year);
@@ -49,7 +49,7 @@ function getQueryVariable() {
 
 let shortDesc = document.getElementById('shortDescription');
 let p = document.createElement('p');
-p.innerHTML = videos[index].shortDescription;
+p.innerHTML = videosBack[index].shortDescription;
 shortDesc.appendChild(p);
 let showMore = document.createElement('button');
 showMore.innerHTML = 'Read more';
@@ -59,7 +59,7 @@ shortDesc.appendChild(showMore);
 let largeDesc = document.getElementById('largeDescription');
 largeDesc.style.display = 'none';
 let largeParagrh = document.createElement('p');
-largeParagrh.innerHTML = videos[index].largeDescription;
+largeParagrh.innerHTML = videosBack[index].largeDescription;
 largeDesc.appendChild(largeParagrh);
 let hideMore = document.createElement('button');
 hideMore.innerHTML = 'Hide more';

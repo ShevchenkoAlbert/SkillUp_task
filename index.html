@@ -6,10 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="style/reset.css">
 	<link rel="stylesheet" href="style/style.css">
+
+	<script src="node_modules/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 	<script src="js/video.config.js"></script>
 	<script src="js/advertising.config.js"></script>
 	<script src="js/user.js"></script>
 	<script src="js/main.js"></script>
+
 </head>
 <body>
 	<header>
@@ -21,18 +26,23 @@
 			<input type="text" class="header_input" id="login" placeholder="login">
 			<input type="password" class="header_input" id="password" placeholder="password">
 			<input type="button" id="singIn" class="header_input" value="Sing in" >
+			<span id="loggedUser"></span>
 			<input type="button" id="logOut" value="Log Out">
 		</div>
 	</header>
 	<section>
 		<div class="buttons">
-			<button id="showContent">Show content</button>
+			<button id="getContent">Get content</button>
 			<button id="filterBut">Filter videos</button>
 			<button id="sortBut">Sort videos</button>
 		</div>
 		<div id="content" class="content">
 			
 		</div>
+		<div class="spiner" id="spiner">
+				<img src="img/jstips-animation.gif" alt="spiner">
+			</div>
 	</section>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
-const advertising = [
+let advertising = [];
+const advertisingBack = [
 {
 	"url": "./img/reklama.jpeg",
 	"id": 1
